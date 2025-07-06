@@ -1,6 +1,7 @@
 import { APIGatewayProxyEvent, APIGatewayProxyResult } from "aws-lambda";
 import { SupabaseDocumentRepository } from "../../database/SupabaseDocumentRepository";
 import { UpdateDocument } from "../../../application/use-cases/UpdateDocument";
+import { corsResponse } from "../CorsResponse";
 
 const documentRepository = new SupabaseDocumentRepository();
 const updateDocument = new UpdateDocument(documentRepository);
