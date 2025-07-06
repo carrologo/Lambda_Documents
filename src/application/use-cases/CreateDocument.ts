@@ -15,7 +15,7 @@ export class CreateDocument {
       expirationDate,
       documentTypeId,
       idVehicle,
-      !category ? category : null
+        category || null
     );
     return this.documentRepository.save(document);
   }
