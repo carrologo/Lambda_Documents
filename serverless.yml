@@ -14,10 +14,14 @@ plugins:
 
 functions:
   lambdaDocument:
-    name: lambdaDocument
-    handler: src/infrastructure/lambdas/handler.handler
+    name: document
+    handler: src/infrastructure/lambdas/handler.documentHandler
     events:
       - http:
-          path: /clients
-          method: post
+          path: /documents
+          method: any
+          cors: true
+      - http:
+          path: /documents/{id}
+          method: any
           cors: true
