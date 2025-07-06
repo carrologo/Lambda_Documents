@@ -1,0 +1,3 @@
+/Users/heyller.palomino/Documents/GitHub/Lambda_Documents/src/domain/entities/Client.ts
+/Users/heyller.palomino/Documents/GitHub/Lambda_Documents/src/domain/repositories/ClientRepository.ts
+/Users/heyller.palomino/Documents/GitHub/Lambda_Documents/src/infrastructure/database/SupabaseClientRepository.ts

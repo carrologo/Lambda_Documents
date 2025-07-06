@@ -8,14 +8,14 @@ export class CreateDocument {
     expirationDate: Date,
     documentTypeId: number,
     idVehicle: number,
-    category: string,
+    category: string
   ): Promise<Document> {
     const document = new Document(
       null,
       expirationDate,
       documentTypeId,
       idVehicle,
-      !category? category : null,
+      !category ? category : null
     );
     return this.documentRepository.save(document);
   }

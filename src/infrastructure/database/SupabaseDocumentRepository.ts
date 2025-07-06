@@ -23,10 +23,9 @@ export class SupabaseDocumentRepository implements DocumentRepository {
       .single();
     if (error) throw new Error(error.message);
 
-
     if (document.vehicleId) {
-        console.log("data.id:", data);
-        console.log("document.vehicleId:", document.vehicleId);
+      console.log("data.id:", data);
+      console.log("document.vehicleId:", document.vehicleId);
       const { error: vehicleDocError } = await this.supabase
         .from("vehicle_document")
         .insert({
@@ -41,10 +40,10 @@ export class SupabaseDocumentRepository implements DocumentRepository {
       new Date(data.expiration_date),
       data.document_type_id,
       document.vehicleId,
-      data.category,
+      data.category
     );
   }
-// ...existing code...
+  // ...existing code...
 
   async update(id: number, data: Partial<Document>): Promise<Document> {
     const { data: updated, error } = await this.supabase
@@ -78,17 +77,16 @@ export class SupabaseDocumentRepository implements DocumentRepository {
   }
 
   async findAll(): Promise<Document[]> {
-    const { data, error } = await this.supabase
-      .from("document")
-      .select();
+    const { data, error } = await this.supabase.from("document").select();
     if (error) throw new Error(error.message);
-    return (data || []).map((d: any) =>
-      new Document(
-        d.id,
-        new Date(d.expiration_date),
-        d.category,
-        d.document_type_id
-      )
+    return (data || []).map(
+      (d: any) =>
+        new Document(
+          d.id,
+          new Date(d.expiration_date),
+          d.category,
+          d.document_type_id
+        )
     );
   }
 }

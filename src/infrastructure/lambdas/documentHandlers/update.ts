@@ -11,18 +11,20 @@ export const updateDocumentHandler = async (
   try {
     const id = Number(event.pathParameters?.id);
     if (!id) {
-      return { statusCode: 400, body: JSON.stringify({ message: "ID is required" }) };
+      return {
+        statusCode: 400,
+        body: JSON.stringify({ message: "ID is required" }),
+      };
     }
     const body = JSON.parse(event.body || "{}");
     const document = await updateDocument.execute(id, body);
-    return {
-      statusCode: 200,
-      body: JSON.stringify(document),
-    };
+    return corsResponse(200, document);
   } catch (error) {
     return {
       statusCode: 500,
-      body: JSON.stringify({ message: error instanceof Error ? error.message : "Unknown error" }),
+      body: JSON.stringify({
+        message: error instanceof Error ? error.message : "Unknown error",
+      }),
     };
   }
 };

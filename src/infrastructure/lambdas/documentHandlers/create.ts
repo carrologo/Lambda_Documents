@@ -1,6 +1,7 @@
 import { APIGatewayProxyEvent, APIGatewayProxyResult } from "aws-lambda";
 import { SupabaseDocumentRepository } from "../../database/SupabaseDocumentRepository";
 import { CreateDocument } from "../../../application/use-cases/CreateDocument";
+import { corsResponse } from "../CorsResponse";
 
 const documentRepository = new SupabaseDocumentRepository();
 const createDocument = new CreateDocument(documentRepository);
@@ -11,7 +12,7 @@ export const createDocumentHandler = async (
   try {
     const body = JSON.parse(event.body || "{}");
     const { expirationDate, category, documentTypeId, idVehicle } = body;
-    if ( !expirationDate || !documentTypeId || !idVehicle) {
+    if (!expirationDate || !documentTypeId || !idVehicle) {
       return {
         statusCode: 400,
         body: JSON.stringify({ message: "All fields are required" }),
@@ -23,10 +24,7 @@ export const createDocumentHandler = async (
       idVehicle,
       category
     );
-    return {
-      statusCode: 201,
-      body: JSON.stringify(document),
-    };
+    return corsResponse(201, document);
   } catch (error) {
     return {
       statusCode: 500,
