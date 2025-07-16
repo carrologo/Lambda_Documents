@@ -21,11 +21,23 @@ functions:
     events:
       - http:
           path: /documents
-          method: any
+          method: post
+          cors: true
+      - http:
+          path: /documents
+          method: get
           cors: true
       - http:
           path: /documents/{id}
           method: get
+          cors: true
+      - http:
+          path: /documents/{id}
+          method: put
+          cors: true
+      - http:
+          path: /documents/{id}
+          method: patch
           cors: true
       - http:
           path: /document-types
